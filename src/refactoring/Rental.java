@@ -5,7 +5,7 @@ import v0.Movie;
 public class Rental
 {
 	private v0.Movie _movie;
-	private int		_daysRented;
+	private int      _daysRented;
 
 	public Rental(v0.Movie movie, int daysRented)
 	{
@@ -13,24 +13,35 @@ public class Rental
 		_daysRented = daysRented;
 	}
 
-	static double getAmount(v0.Rental each, double thisAmount) {
-		switch (each.getMovie().getPriceCode())
+	public double getAmount() {
+		double thisAmount = 0;
+
+		switch (getMovie().getPriceCode())
 		{
 			case REGULAR:
 				thisAmount += 2;
-				if (each.getDaysRented() > 2)
-					thisAmount += (each.getDaysRented() - 2) * 1.5;
+				if (getDaysRented() > 2)
+					thisAmount += (getDaysRented() - 2) * 1.5;
 				break;
 			case NEW_RELEASE:
-				thisAmount += each.getDaysRented() * 3;
+				thisAmount += getDaysRented() * 3;
 				break;
 			case CHILDRENS:
 				thisAmount += 1.5;
-				if (each.getDaysRented() > 3)
-					thisAmount += (each.getDaysRented() - 3) * 1.5;
+				if (getDaysRented() > 3)
+					thisAmount += (getDaysRented() - 3) * 1.5;
 				break;
 		}
 		return thisAmount;
+	}
+
+
+	public int getFrequentRenterPoints() {
+		int frequentRenterPoints = 1;
+		// add bonus for a two day new release rental
+		if ((getMovie().getPriceCode() == Movie.Code.NEW_RELEASE) && getDaysRented() > 1)
+			frequentRenterPoints++;
+		return frequentRenterPoints;
 	}
 
 	public int getDaysRented()

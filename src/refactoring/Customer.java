@@ -1,14 +1,11 @@
 package refactoring;
 
-import v0.Movie;
-import v0.Rental;
-
 import java.util.Vector;
 
 public class Customer
 {
-	private String			_name;
-	private Vector<Rental>	_rentals	= new Vector<Rental>();
+	private String            _name;
+	private Vector<Rental>    _rentals    = new Vector<Rental>();
 
 	public Customer(String _name)
 	{
@@ -35,13 +32,11 @@ public class Customer
 
 		for (Rental each: _rentals)
 		{
-
-
 			// determine amounts for each line
-			double thisAmount = refactoring.Rental.getAmount(each, 0);
+			double thisAmount = each.getAmount();
 
 			// add frequent renter points
-			frequentRenterPoints = getFrequentRenterPoints(each, frequentRenterPoints);
+			frequentRenterPoints += each.getFrequentRenterPoints();
 
 			// show figures for this rental
 			result += "\t" + each.getMovie().getTitle() + "\t" + thisAmount + "\n";
@@ -53,14 +48,4 @@ public class Customer
 		result += "You earned " + frequentRenterPoints + " frequent renter points";
 		return result;
 	}
-
-	private static int getFrequentRenterPoints(Rental each, int frequentRenterPoints) {
-		frequentRenterPoints++;
-
-		// add bonus for a two day new release rental
-		if ((each.getMovie().getPriceCode() == Movie.Code.NEW_RELEASE) && each.getDaysRented() > 1)
-			frequentRenterPoints++;
-		return frequentRenterPoints;
-	}
-
 }
