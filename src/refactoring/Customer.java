@@ -35,17 +35,13 @@ public class Customer
 
 		for (Rental each: _rentals)
 		{
-			double thisAmount = 0;
+
 
 			// determine amounts for each line
-			thisAmount = refactoring.Rental.getAmount(each, thisAmount);
+			double thisAmount = refactoring.Rental.getAmount(each, 0);
 
 			// add frequent renter points
-			frequentRenterPoints++;
-
-			// add bonus for a two day new release rental
-			if ((each.getMovie().getPriceCode() == Movie.Code.NEW_RELEASE) && each.getDaysRented() > 1)
-				frequentRenterPoints++;
+			frequentRenterPoints = getFrequentRenterPoints(each, frequentRenterPoints);
 
 			// show figures for this rental
 			result += "\t" + each.getMovie().getTitle() + "\t" + thisAmount + "\n";
@@ -56,6 +52,15 @@ public class Customer
 		result += "Amount owed is " + totalAmount + "\n";
 		result += "You earned " + frequentRenterPoints + " frequent renter points";
 		return result;
+	}
+
+	private static int getFrequentRenterPoints(Rental each, int frequentRenterPoints) {
+		frequentRenterPoints++;
+
+		// add bonus for a two day new release rental
+		if ((each.getMovie().getPriceCode() == Movie.Code.NEW_RELEASE) && each.getDaysRented() > 1)
+			frequentRenterPoints++;
+		return frequentRenterPoints;
 	}
 
 }
