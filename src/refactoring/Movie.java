@@ -1,7 +1,13 @@
 package refactoring;
 
 public class Movie {
+	private String _title;
+	private Code _priceCode;
 
+	public Movie(String title, Code priceCode) {
+		_title = title;
+		_priceCode = priceCode;
+	}
 	public double getRentalAmount(int daysRented) {
 		double thisAmount = 0;
 
@@ -24,23 +30,14 @@ public class Movie {
 	}
 
 	public int getFrequentRenterPoints(int daysRented) {
-		int points = 1;
-		if ((getPriceCode() == Movie.Code.NEW_RELEASE) && daysRented > 1)
-			points++;
-		return points;
+		return (_priceCode == Movie.Code.NEW_RELEASE) && daysRented > 1 ? 2 : 1;
 	}
 
 
 
 	public enum Code {REGULAR, CHILDRENS, NEW_RELEASE};
 	
-	private String _title;
-	private Code _priceCode;
-	
-	public Movie(String title, Code priceCode) {
-		_title = title;
-		_priceCode = priceCode;
-	}
+
 
 	public String getTitle() {
 		return _title;
