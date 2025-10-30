@@ -2,11 +2,11 @@ package refactoring;
 
 public class Movie {
 	private String _title;
-	private price _price;  // substitui Code
+	private price _price;
 
 	public Movie(String title, price.Code priceCode) {
 		_title = title;
-		_price = new price(priceCode);
+		setPriceCode(priceCode);
 	}
 
 	public double getRentalAmount(int daysRented) {
@@ -23,5 +23,19 @@ public class Movie {
 
 	public price.Code getPriceCode() {
 		return _price.getPriceCode();
+	}
+
+	public void setPriceCode(price.Code code) {
+		switch (code) {
+			case REGULAR:
+				_price = new RegularPrice();
+				break;
+			case CHILDRENS:
+				_price = new ChildrensPrice();
+				break;
+			case NEW_RELEASE:
+				_price = new NewReleasePrice();
+				break;
+		}
 	}
 }
