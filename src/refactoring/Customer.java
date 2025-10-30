@@ -30,7 +30,7 @@ public class Customer
 		for (Rental each : _rentals)
 		{
 			// show figures for this rental
-			result += "\t" + each.getMovie().getTitle() + "\t" + each.getAmount() + "\n";
+			result += "\t" + each.getMovie().getTitle() + "\t" + each._movie.getAmount(each) + "\n";
 		}
 
 		// add footer lines
@@ -45,7 +45,7 @@ public class Customer
 
 		for (Rental each : _rentals)
 		{
-			result += each.getMovie().getTitle() + ": " + each.getAmount() + "<br>\n";
+			result += each.getMovie().getTitle() + ": " + each._movie.getAmount(each) + "<br>\n";
 		}
 
 		result += "<p>You owe <em>" + getTotalAmount() + "</em><p>\n";
@@ -57,7 +57,7 @@ public class Customer
 	private double getTotalAmount() {
 		double totalAmount = 0;
 		for (Rental each : _rentals) {
-			totalAmount += each.getAmount();
+			totalAmount += each._movie.getAmount(each);
 		}
 		return totalAmount;
 	}
@@ -65,7 +65,7 @@ public class Customer
 	private int getTotalFrequentRenterPoints() {
 		int frequentRenterPoints = 0;
 		for (Rental each : _rentals) {
-			frequentRenterPoints += each.getFrequentRenterPoints();
+			frequentRenterPoints += each._movie.getFrequentRenterPoints(each);
 		}
 		return frequentRenterPoints;
 	}
