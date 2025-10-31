@@ -1,20 +1,14 @@
 package v9;
 
-public class NewReleasePrice extends Price
-{
+public class NewReleasePrice extends Price {
 
-	public NewReleasePrice()
-	{
-	}
-
-	public double getRentalAmount(int duration)
-	{
+	@Override
+	public double getRentalAmount(int duration) {
 		return duration * 3;
 	}
 
-	public int getFrequentRentalPoints(int duration)
-	{
+	@Override
+	public int getFrequentRentalPoints(int duration) {
 		return duration > 1 ? 2 : 1;
 	}
-
 }
