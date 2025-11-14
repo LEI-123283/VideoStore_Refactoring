@@ -29,7 +29,7 @@ public class Customer
 
 		// header
 		String result = "Rental Record for " + getName() + "\n";
-		
+
 		for (Rental each: _rentals)
 		{
 			double thisAmount = 0;
